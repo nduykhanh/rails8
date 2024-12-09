@@ -19,15 +19,6 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Install glibc
-RUN apt-get update && apt-get install -y wget build-essential && \
-    wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz && \
-    tar -xvzf glibc-2.34.tar.gz && cd glibc-2.34 && \
-    mkdir build && cd build && \
-    ../configure --prefix=/usr && make -j$(nproc) && make install && \
-    export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH && \
-    rm -rf /glibc-2.34*
-
 # Set production environment
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
@@ -78,8 +69,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
-
-# Install glibc
-ENV LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
 CMD ["./bin/thrust", "./bin/rails", "server"]
