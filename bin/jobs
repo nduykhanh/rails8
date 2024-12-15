@@ -3,8 +3,4 @@
 require_relative "../config/environment"
 require "solid_queue/cli"
 
-SolidQueue.stop
-SolidQueue::Worker.stop
-SolidQueue::Dispatcher.stop
-
-SolidQueue::Cli.start(ARGV)
+# SolidQueue::Cli.start(ARGV)
