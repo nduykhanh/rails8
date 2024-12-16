@@ -378,7 +378,7 @@ DEPENDENCIES
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
-  thruster (~> 0.1.8)
+  thruster
   turbo-rails
   tzinfo-data
   web-console
